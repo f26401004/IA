@@ -2,10 +2,12 @@ import '../services/PinterestFetch.dart' as pinterest;
 import '../services/DribbbleFetch.dart' as dribbble;
 
 class PostListModel {
-  static const _types = [
+  List<String> _types = [
     'pinterest',
     'dribbble'
   ];
+
+  bool status = false;
 
   List<Post> _posts;
 
@@ -14,9 +16,11 @@ class PostListModel {
     List<Post> dribbblePosts = await dribbble.fetchPost();
 
     _posts = []..addAll(pinterestPosts)..addAll(dribbblePosts);
+    status = true;
   }
 
   Post getById(String id) => this._posts.firstWhere((post) => post.getId() == id, orElse: () => null);
+  List<String> getTypes() => this._types;
   
   List<Post> getByType(String type) {
     // check the type of the post.

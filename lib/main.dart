@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(builder: (context) async {
+        Provider<PostListModel>(builder: (context) {
           PostListModel model = PostListModel();
-          await model.fetchData();
+          model.fetchData();
           return model;
         }),
         ChangeNotifierProxyProvider<PostListModel, CollectionListModel>(
